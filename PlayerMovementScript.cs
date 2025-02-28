@@ -129,13 +129,13 @@ public class PlayerMovementScript : MonoBehaviour
     void FixedUpdate(){
         if(movementDirection == Vector3.zero){return;}
         rb.AddForce(movementDirection * forceMagnitude * Time.deltaTime,ForceMode.Force);
-        rb.linearVelocity =Vector3.ClampMagnitude(rb.linearVelocity, maxVelocity);
+        rb.velocity =Vector3.ClampMagnitude(rb.velocity, maxVelocity);
     }
 
     private void RotateToFaceVelocity(){
-        if(rb.linearVelocity  == Vector3.zero){return;}
+        if(rb.velocity  == Vector3.zero){return;}
 
-        Quaternion targetRotation = Quaternion.LookRotation(rb.linearVelocity, Vector3.back);
+        Quaternion targetRotation = Quaternion.LookRotation(rb.velocity, Vector3.back);
         transform.rotation = Quaternion.Lerp(
             transform.rotation,targetRotation, rotationSpeed * Time.deltaTime);
     }
