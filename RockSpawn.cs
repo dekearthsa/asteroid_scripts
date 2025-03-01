@@ -35,58 +35,46 @@ public class RockSpawn : MonoBehaviour
         // float halfWidth = camWidth / 2f;
         // float halfHeight = camHeight / 2f;
 
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1,  mainCamera.nearClipPlane));
+        // Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane));
+        // Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1,  mainCamera.nearClipPlane));
 
-        float leftEdge = bottomLeft.x;
-        float rightEdge = topRight.x;
-        float bottomEdge = bottomLeft.y;
-        float topEdge = topRight.y;
+        // float leftEdge = bottomLeft.x;
+        // float rightEdge = topRight.x;
+        // float bottomEdge = bottomLeft.y;
+        // float topEdge = topRight.y;
 
-        spawnPoint = mainCamera.ViewportToWorldPoint(new Vector3(0, Random.value, mainCamera.nearClipPlane + 10f));
-        spawnPoint.z = 0;
-        direction = new Vector2(1f, Random.Range(-1f, 1f));
-        Debug.Log(spawnPoint);
+        switch (side)
+        {
+            case 0: 
+                // Left
+                spawnPoint = mainCamera.ViewportToWorldPoint(
+                    new Vector3(0,Random.value,mainCamera.nearClipPlane+10f));
+                spawnPoint.z = 0;
+                direction = new Vector2(1f, Random.Range(-1f, 1f));
+                break;
 
-        // switch (side)
-        // {
-        //     case 0: 
-        //         // Left
-        //         // spawnPoint = new Vector3(
-        //         //     mainCamera.transform.position.x - halfWidth - 1f, 
-        //         //     Random.Range(mainCamera.transform.position.y - halfHeight, mainCamera.transform.position.y + halfHeight),
-        //         //     0);
-        //         spawnPoint = new Vector3(leftEdge, 0, 0);
-        //         direction = new Vector2(1f, Random.Range(-1f, 1f));
-        //         break;
+            case 1: // Right
+                spawnPoint = mainCamera.ViewportToWorldPoint(
+                    new Vector3(1, Random.value, mainCamera.nearClipPlane+10f));
+                spawnPoint.z = 0;
+                direction = new Vector2(-1f, Random.Range(-1f, 1f));
+                break;
 
-        //     case 1: // Right
-        //         // spawnPoint = new Vector3(
-        //         //     mainCamera.transform.position.x + halfWidth + 1f, 
-        //         //     Random.Range(mainCamera.transform.position.y - halfHeight, mainCamera.transform.position.y + halfHeight),
-        //         //     0);
-        //         spawnPoint = new Vector3(rightEdge, 0, 0);
-        //         direction = new Vector2(-1f, Random.Range(-1f, 1f));
-        //         break;
+            case 2: // Bottom
+                spawnPoint = mainCamera.ViewportToWorldPoint(
+                    new Vector3(Random.value, 0, mainCamera.nearClipPlane + 10f));
+                spawnPoint.z = 0;
+                direction = new Vector2(Random.Range(-1f, 1f),1f);
+                break;
 
-        //     case 2: // Bottom
-        //         // spawnPoint = new Vector3(
-        //         //     Random.Range(mainCamera.transform.position.x - halfWidth, mainCamera.transform.position.x + halfWidth), 
-        //         //     mainCamera.transform.position.y - halfHeight - 1f, 
-        //         //     0);
-        //         spawnPoint = new Vector3(0, bottomEdge, 0);
-        //         direction = new Vector2(Random.Range(-1f, 1f), 1f);
-        //         break;
-
-        //     case 3: // Top
-        //         // spawnPoint = new Vector3(
-        //         //     Random.Range(mainCamera.transform.position.x - halfWidth, mainCamera.transform.position.x + halfWidth), 
-        //         //     mainCamera.transform.position.y + halfHeight + 1f, 
-        //         //     0);
-        //         spawnPoint = new Vector3(0, topEdge, 0);
-        //         direction = new Vector2(Random.Range(-1f, 1f), -1f);
-        //         break;
-        // }
+            case 3: // Top
+                spawnPoint = mainCamera.ViewportToWorldPoint(
+                    new Vector3(Random.value, 1, mainCamera.nearClipPlane + 10f));
+                spawnPoint.z = 0;
+                direction = new Vector2(Random.Range(-1f, 1f),-1f);
+                // Debug.Log(spawnPoint);
+                break;
+        }
 
         // สุ่มก้อนหินที่ต้องการสร้าง
         GameObject selectedRock = rockPrefabs[Random.Range(0, rockPrefabs.Length)];
