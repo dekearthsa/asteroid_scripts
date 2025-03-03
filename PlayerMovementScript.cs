@@ -12,7 +12,7 @@ public class PlayerMovementScript : MonoBehaviour
     private Camera mainCamera;
     private Vector3 movementDirection;
     
-    private string moveRotaionStatus;
+    // private string moveRotaionStatus;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -118,14 +118,14 @@ public class PlayerMovementScript : MonoBehaviour
     //     return positive;
     // }
 
-    public void MoveLeftRotation(){
-        moveRotaionStatus = "left";
+    // public void MoveLeftRotation(){
+    //     moveRotaionStatus = "left";
         
-    }
-    public void MoveRightRotaion(){
-        moveRotaionStatus = "right";
+    // }
+    // public void MoveRightRotaion(){
+    //     moveRotaionStatus = "right";
         
-    }
+    // }
     void FixedUpdate(){
         if(movementDirection == Vector3.zero){return;}
         rb.AddForce(movementDirection * forceMagnitude * Time.deltaTime,ForceMode.Force);
